@@ -1,4 +1,4 @@
-const config = require('./config.json');
+const credentials = require('./credentials.json');
 const glob = require('glob');
 const path = require('path');
 
@@ -45,4 +45,4 @@ glob.sync('./extensions/*.js').forEach(file => {
 
 // Login to Discord with your client's token
 console.log('Starting!');
-client.login(config.discord.botsecret);
+client.login(credentials.discord.botsecret);

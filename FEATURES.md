@@ -101,6 +101,7 @@
   * `!isithuntyet`: Is it hunt yet?
   * `fun_replies()` (**on_message**)
     * 50/50, thanks obama, !backsolv
+  * `!backsolve`: goofy reply
   * `!hooray`: party emojis
 
 
