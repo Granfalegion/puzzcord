@@ -1,0 +1,39 @@
+{
+  "name": "puzzcord",
+  "version": "1.0.0",
+  "description": "puzzcord, a Discord bot for Mystery Hunt",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dannybd/puzzcord.git"
+  },
+  "keywords": [
+    "discord.js",
+    "bot",
+    "discord",
+    "mystery hunt",
+    "ATTORNEY"
+  ],
+  "author": "dannybd",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dannybd/puzzcord/issues"
+  },
+  "homepage": "https://github.com/dannybd/puzzcord#readme",
+  "dependencies": {
+    "@discordjs/builders": "^0.6.0",
+    "@discordjs/rest": "^0.1.0-canary.0",
+    "crypto": "^1.0.1",
+    "discord-api-types": "^0.23.1",
+    "discord.js": "^13.3.1",
+    "hsv-rgb": "^1.0.0",
+    "log-timestamp": "^0.3.0",
+    "memoizee": "^0.4.15"
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0"
+  }
+}

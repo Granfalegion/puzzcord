@@ -1,6 +1,11 @@
-config.json
+config.ini
 __pycache__/
 *.swp
 logs/*
 !logs/example.log
+data/*
+!data/example.json
 *.py~
+node_modules
+.env
+config.json
