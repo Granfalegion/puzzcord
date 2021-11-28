@@ -1,0 +1,26 @@
+{
+  "guild_key": "prod",
+  "guild_id": "790341470171168800",
+  "roles": {
+    "member": "790341818885734430",
+    "visitor": "795153098749771776",
+    "puzztech": "790341841916002335",
+    "puzzboss": "799032063725535242",
+    "betaboss": "794351348295663616"
+  },
+  "channels": {
+    "puzztech": "790387626531225611",
+    "status": "790348440890507285",
+    "table_report": "800167637354283038"
+  },
+  "non_members": {
+    "allowed_channels": [
+      "790341470602264576"
+    ],
+    "allowed_commands": [
+      "huntyet",
+      "isithuntyet",
+      "hooray"
+    ]
+  }
+}

@@ -18,7 +18,7 @@ from common import *
 from credentials import credentials
 from discord.ext import commands
 from discord.ext.commands import guild_only
-from discord_info import GUILD_ID, WELCOME_LOBBY, get_team_members
+from discord_info import GUILD_ID, PROD_CONFIG, get_team_members
 
 # Define logging levels
 loglevel = os.environ.get("LOGLEVEL", "INFO").upper()
@@ -73,10 +73,11 @@ async def members_only(ctx):
     if ctx.guild and ctx.guild != guild:
         return False
 
-    if ctx.channel.id != WELCOME_LOBBY:
+    non_members = PROD_CONFIG["non_members"]
+    if str(ctx.channel.id) not in non_members["allowed_channels"]:
         return True
 
-    if ctx.invoked_with in ["huntyet", "isithuntyet", "hooray"]:
+    if ctx.invoked_with in non_members["allowed_commands"]:
         return True
 
     msg = "No spoilers! Can't run this in {0.mention}".format(ctx.channel)

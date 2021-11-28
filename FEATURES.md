@@ -111,7 +111,7 @@
 =============
 
 # TODO:
-* Move constants to JSON
+* ~~Move constants to JSON~~
 * Move toys
 * Move solving_tools
 * Move pin_messages

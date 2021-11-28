@@ -1,20 +1,22 @@
 """ Utility functions for getting information about discord channels, users, etc. """
 
 import discord
+import json
 
+with open("configs/prod.json", "r") as f:
+    PROD_CONFIG = json.load(f)
 
-GUILD_ID = 790341470171168800
+GUILD_ID = int(PROD_CONFIG["guild_id"])
 
-VISITOR_ROLE = 795153098749771776
-HUNT_MEMBER_ROLE = 790341818885734430
-PUZZTECH_ROLE = 790341841916002335
-PUZZBOSS_ROLE = 799032063725535242
-BETABOSS_ROLE = 794351348295663616
+VISITOR_ROLE = int(PROD_CONFIG["roles"]["visitor"])
+HUNT_MEMBER_ROLE = int(PROD_CONFIG["roles"]["member"])
+PUZZTECH_ROLE = int(PROD_CONFIG["roles"]["puzztech"])
+PUZZBOSS_ROLE = int(PROD_CONFIG["roles"]["puzzboss"])
+BETABOSS_ROLE = int(PROD_CONFIG["roles"]["betaboss"])
 
-WELCOME_LOBBY = 790341470602264576
-PUZZTECH_CHANNEL = 790387626531225611
-STATUS_CHANNEL = 790348440890507285
-TABLE_REPORT_CHANNEL = 800167637354283038
+PUZZTECH_CHANNEL = int(PROD_CONFIG["channels"]["puzztech"])
+STATUS_CHANNEL = int(PROD_CONFIG["channels"]["status"])
+TABLE_REPORT_CHANNEL = int(PROD_CONFIG["channels"]["table_report"])
 
 
 def get_team_members(guild):
