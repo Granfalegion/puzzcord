@@ -5,14 +5,14 @@ import json
 import logging
 import pymysql
 import re
-from config import config
+from credentials import credentials
 from discord_info import is_puzzle_channel
 
 
 class REST:
     @staticmethod
     async def post(path, data=None):
-        url = config["puzzledb"]["rest_url"] + path
+        url = credentials["puzzledb"]["rest_url"] + path
         if data:
             data = json.dumps(data)
         async with aiohttp.ClientSession() as session:
@@ -33,13 +33,13 @@ class SQL:
             return bot.connection
 
         logging.info("[SQL] No bot found, creating new connection")
-        creds = config["puzzledb"]
+        db_creds = credentials["puzzledb"]
         return pymysql.connect(
-            host=creds["host"],
-            port=creds["port"],
-            user=creds["user"].lower(),
-            password=creds["passwd"],
-            db=creds["db"],
+            host=db_creds["host"],
+            port=db_creds["port"],
+            user=db_creds["user"].lower(),
+            password=db_creds["passwd"],
+            db=db_creds["db"],
             cursorclass=pymysql.cursors.DictCursor,
             autocommit=True,
         )

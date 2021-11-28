@@ -11,7 +11,7 @@ import pymysql
 import sys
 
 from common import *
-from config import config
+from credentials import credentials
 from datetime import datetime, timedelta
 
 nest_asyncio.apply()
@@ -33,8 +33,8 @@ async def on_ready():
         loop = asyncio.get_event_loop()
         coro = asyncio.start_server(
             gen_handle_server_request,
-            host=config["asyncio_server"]["host"],
-            port=config["asyncio_server"]["port"],
+            host=credentials["asyncio_server"]["host"],
+            port=credentials["asyncio_server"]["port"],
             loop=loop,
         )
         server = loop.run_until_complete(coro)
@@ -488,13 +488,13 @@ def _get_puzzle_from_db(puzzle_name):
 
 
 def get_db_connection():
-    creds = config["puzzledb"]
+    db_creds = credentials["puzzledb"]
     return pymysql.connect(
-        host=creds["host"],
-        port=creds["port"],
-        user=creds["user"].lower(),
-        password=creds["passwd"],
-        db=creds["db"],
+        host=db_creds["host"],
+        port=db_creds["port"],
+        user=db_creds["user"].lower(),
+        password=db_creds["passwd"],
+        db=db_creds["db"],
         cursorclass=pymysql.cursors.DictCursor,
     )
 
@@ -514,5 +514,5 @@ if __name__ == "__main__":
         logging.getLogger("discord").setLevel(logging.WARNING)
 
     logging.info("Starting!")
-    client.run(config["discord"]["botsecret"])
+    client.run(credentials["discord"]["botsecret"])
     logging.info("Done, closing out")

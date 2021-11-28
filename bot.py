@@ -15,9 +15,9 @@ import glob
 import puzzboss_interface
 
 from common import *
+from credentials import credentials
 from discord.ext import commands
 from discord.ext.commands import guild_only
-from config import config
 from discord_info import GUILD_ID, WELCOME_LOBBY, get_team_members
 
 # Define logging levels
@@ -95,5 +95,5 @@ for extension in glob.glob("extensions/*.py"):
         exc = "{}: {}".format(type(e).__name__, traceback.format_exc())
         logging.warning("Failed to load extension {}\n{}".format(extension, exc))
 logging.info("Starting!")
-bot.run(config["discord"]["botsecret"])
+bot.run(credentials["discord"]["botsecret"])
 logging.info("Done, closing out")
