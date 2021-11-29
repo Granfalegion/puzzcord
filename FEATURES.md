@@ -89,8 +89,8 @@
   * `!tools`: [category] Assorted puzzle-solving tools and utilities
   * **[JS]** `!stuck`: Suggests some tips from the Have You Tried? list
   * **[JS]** `!rot`: Rotates a message through all rot N and displays the permutations
-  * `!rot_specific`: Rotates a message just by rotN
-    * Supports !rot0, !rot1, etc.
+  * **[JS]** `!rot_specific`: Rotates a message just by rotN
+    * **[JS]** Supports !rot0, !rot1, etc.
   * `!roll`: Rolls a dice in NdN format.
   * `!nutrimatic`: Queries nutrimatic.org
   * `!abc`: Converts letters A-Z to/from numbers 1-26

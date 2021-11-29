@@ -32,6 +32,34 @@ function allRotN(message) {
   return [...Array(26).keys()].map(i => chars.map(c => c[i]).join(''));
 }
 
+const rotSpecificCommands = [...Array(26).keys()].map(i => {
+  const n = i + 1;
+  return {
+    schema: new SlashCommandBuilder()
+      .setName(`rot${n}`)
+      .setDescription(`Rotates a message just by rot${n}`)
+      .addStringOption(option => option
+        .setName('message')
+        .setDescription(`Message to rotate through rot${n}`)
+        .setRequired(true),
+      ),
+    execute: async (interaction) => {
+      const message = interaction.options.getString('message');
+      let response = '```\n';
+      response += `ORIGINAL: ${message}\n`;
+      response += `ROT ${n}: `.padStart(10) + allRotN(message)[n % 26];
+      response += '\n```';
+      try {
+        await interaction.reply(response);
+      } catch (_) {
+        await interaction.reply(
+          'Sorry, response was too long for Discord. Try a shorter string',
+        );
+      }
+    },
+  };
+});
+
 module.exports = {
   commands: [
     {
@@ -77,9 +105,12 @@ module.exports = {
         try {
           await interaction.reply(response);
         } catch (_) {
-          await interaction.reply('Sorry, response was too long for Discord. Try a shorter string');
+          await interaction.reply(
+            'Sorry, response was too long for Discord. Try a shorter string',
+          );
         }
       },
     },
+    ...rotSpecificCommands,
   ],
 };
