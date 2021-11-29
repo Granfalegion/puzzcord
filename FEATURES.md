@@ -91,7 +91,7 @@
   * **[JS]** `!rot`: Rotates a message through all rot N and displays the permutations
   * **[JS]** `!rot_specific`: Rotates a message just by rotN
     * **[JS]** Supports !rot0, !rot1, etc.
-  * `!roll`: Rolls a dice in NdN format.
+  * **[JS]** `!roll`: Rolls a dice in NdN format.
   * `!nutrimatic`: Queries nutrimatic.org
   * `!abc`: Converts letters A-Z to/from numbers 1-26
   * `!morse`: Convert to/from morse code (/ for word boundaries)

@@ -112,5 +112,45 @@ module.exports = {
       },
     },
     ...rotSpecificCommands,
+    {
+      schema: new SlashCommandBuilder()
+        .setName('roll')
+        .setDescription('Rolls a dice in NdN format.')
+        .addStringOption(option => option
+          .setName('dice')
+          .setDescription('NdN dice (e.g. 2d6, 1d20, etc.)')
+          .setRequired(true),
+        ),
+      execute: async (interaction) => {
+        const dice = interaction.options.getString('dice');
+        const [rolls, limit] = dice.split('d').map(n => parseInt(n, 10));
+        if (
+          isNaN(rolls) ||
+          typeof (rolls) !== 'number' ||
+          rolls < 1 ||
+          isNaN(limit) ||
+          typeof (limit) !== 'number' ||
+          limit < 1
+        ) {
+          await interaction.reply({
+            content: 'Format has to be in NdN!',
+            ephemeral: true,
+          });
+          return;
+        }
+        if (rolls > 100) {
+          await interaction.reply({
+            content: 'Try 100 or fewer rolls.',
+            ephemeral: true,
+          });
+          return;
+        }
+        await interaction.reply(
+          [...Array(rolls).keys()]
+            .map(() => 1 + Math.floor(Math.random() * limit))
+            .join(', '),
+        );
+      },
+    },
   ],
 };
