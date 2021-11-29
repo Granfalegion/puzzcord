@@ -39,10 +39,12 @@ client.commands = {};
 glob.sync('./extensions/*.js').forEach(file => {
   try {
     console.log(`Loading ${file}`);
-    const extension = require(path.resolve(file));
-    extension.setup(client);
-    if (extension.commands?.length) {
-      extension.commands.forEach(command => {
+    const { commands, setup } = require(path.resolve(file));
+    if (setup) {
+      setup(client);
+    }
+    if (commands && commands.length) {
+      commands.forEach(command => {
         const name = command.schema.name;
         invariant(
           !client.commands[name],

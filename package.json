@@ -32,6 +32,7 @@
     "hsv-rgb": "^1.0.0",
     "log-timestamp": "^0.3.0",
     "memoizee": "^0.4.15",
+    "shuffle-array": "^1.0.1",
     "tiny-invariant": "^1.2.0"
   },
   "devDependencies": {

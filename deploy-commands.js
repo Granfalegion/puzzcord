@@ -11,9 +11,9 @@ const schemas = {};
 glob.sync('./extensions/*.js').forEach(file => {
   try {
     console.log(`Loading ${file}`);
-    const extension = require(path.resolve(file));
-    if (extension.commands?.length) {
-      extension.commands.forEach(({ schema }) => {
+    const { commands } = require(path.resolve(file));
+    if (commands && commands.length) {
+      commands.forEach(({ schema }) => {
         const { name } = schema;
         invariant(
           !schemas[schema.name],

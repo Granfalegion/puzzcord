@@ -86,8 +86,9 @@
 
 
 # extensions/solving_tools.py
-  * `!stuck`: Suggests some tips from the Have You Tried? list
-  * `!rot`: Rotates a message through all rot N and displays the permutations
+  * `!tools`: [category] Assorted puzzle-solving tools and utilities
+  * **[JS]** `!stuck`: Suggests some tips from the Have You Tried? list
+  * **[JS]** `!rot`: Rotates a message through all rot N and displays the permutations
   * `!rot_specific`: Rotates a message just by rotN
     * Supports !rot0, !rot1, etc.
   * `!roll`: Rolls a dice in NdN format.
@@ -97,12 +98,13 @@
   * `!braille`: Print the braille alphabet
 
 
-# extensions/toys.py
-  * `!isithuntyet`: Is it hunt yet?
-  * `fun_replies()` (**on_message**)
-    * 50/50, thanks obama, !backsolv
-  * `!backsolve`: goofy reply
-  * `!hooray`: party emojis
+# **[JS]** extensions/toys.py
+  * **[JS]** `!isithuntyet`: Is it hunt yet?
+  * **[JS]** `fun_replies()` (**on_message**)
+    * **[JS]** 50/50,
+    * **[JS]** thanks obama
+  * **[JS]** `!backsolve`: goofy reply
+  * **[JS]** `!hooray`: party emojis
 
 
 # extensions/utils/tables.py (morse code helper)
