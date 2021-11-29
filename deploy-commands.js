@@ -2,7 +2,6 @@ const glob = require('glob');
 const invariant = require('tiny-invariant');
 const path = require('path');
 
-const { SlashCommandBuilder } = require('@discordjs/builders');
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
 const { discord: discordCredentials } = require('./credentials.json');
@@ -14,7 +13,7 @@ glob.sync('./extensions/*.js').forEach(file => {
     console.log(`Loading ${file}`);
     const extension = require(path.resolve(file));
     if (extension.commands?.length) {
-      extension.commands.forEach(({schema}) => {
+      extension.commands.forEach(({ schema }) => {
         const { name } = schema;
         invariant(
           !schemas[schema.name],

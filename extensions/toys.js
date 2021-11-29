@@ -15,6 +15,23 @@ module.exports = {
     },
     {
       schema: new SlashCommandBuilder()
+        .setName('backsolve')
+        .setDescription('Try to backsolve this puzzle'),
+      execute: async (interaction) => {
+        const reply = await interaction.reply({
+          content:
+            'It\'s only backsolving if it comes from the region of '
+            + 'actually understanding all the meta constraints, '
+            + 'otherwise it\'s just sparkling guessing.',
+          fetchReply: true,
+        });
+        await reply.react('✨');
+        await reply.react('🔙');
+        await reply.react('🏁');
+      },
+    },
+    {
+      schema: new SlashCommandBuilder()
         .setName('isithuntyet')
         .setDescription('Is it hunt yet?'),
       execute: async (interaction) => {
@@ -56,7 +73,7 @@ module.exports = {
         return;
       }
       if (/\bthanks,? obama\b/i.test(content)) {
-        await message.reply("You're welcome!");
+        await message.reply('You\'re welcome!');
         log(guild, `'thanks obama' by ${printUser(actor)} in #${channel.name}`);
         return;
       }

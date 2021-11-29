@@ -71,7 +71,7 @@ client.on('interactionCreate', wrapErrors(async (interaction) => {
 
   try {
     log(
-      interaction.guild,
+      guild,
       `Command /${commandName} by ${printUser(user)} in #${channel?.name}`,
     );
     await command.execute(interaction);

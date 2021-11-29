@@ -113,7 +113,7 @@
 
 # TODO:
 * ~~Move constants to JSON~~
-* Move toys
+* ~~Move toys~~
 * Move solving_tools
 * Move pin_messages
 * Add DB SQL connection and library
