@@ -1,6 +1,8 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { log, printUser, wrapErrors } = require('../common.js');
 
+const plural = (num, noun) => num === 1 ? `1 ${noun}` : `${num} ${noun}s`;
+
 module.exports = {
   commands: [
     {
@@ -9,6 +11,27 @@ module.exports = {
         .setDescription('Hooray!'),
       execute: async (interaction) => {
         await interaction.reply('🥳🎉🎊✨');
+      },
+    },
+    {
+      schema: new SlashCommandBuilder()
+        .setName('isithuntyet')
+        .setDescription('Is it hunt yet?'),
+      execute: async (interaction) => {
+        const start = new Date('14 Jan 2022, 12:00:00 EST');
+        const now = new Date();
+        if (now >= start) {
+          await interaction.reply('Yes! 🎉');
+          return;
+        }
+        const secondsLeft = Math.floor((start - now) / 1000);
+        const left = [
+          plural(Math.floor(secondsLeft / 86400), 'day'),
+          plural(Math.floor(secondsLeft / 3600) % 24, 'hour'),
+          plural(Math.floor(secondsLeft / 60) % 60, 'minute'),
+          'and ' + plural(secondsLeft % 60, 'second'),
+        ].join(', ');
+        await interaction.reply(`No! ${left} left.`);
       },
     },
   ],
