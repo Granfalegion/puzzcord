@@ -1,5 +1,6 @@
 const crypto = require('crypto');
 const fs = require('fs');
+const invariant = require('tiny-invariant');
 const memoize = require('memoizee');
 const path = require('path');
 const rgb = require('hsv-rgb');
@@ -40,6 +41,7 @@ function getConfig(guild) {
 
 const getConfigImpl = memoize((guild, cacheCounter) => {
   const key = getGuildKey(guild);
+  invariant(key, `No key found for guild ${guild}!`);
   log(guild, `Reloading config, cache counter = ${cacheCounter}`);
   return JSON.parse(
     fs.readFileSync(path.resolve(__dirname, `configs/${key}.json`)),
@@ -47,7 +49,8 @@ const getConfigImpl = memoize((guild, cacheCounter) => {
 });
 
 function log(guild, msg) {
-  console.log(`>>> GUILD ${getGuildKey(guild).toUpperCase()}: ${msg}`);
+  const key = getGuildKey(guild)?.toUpperCase() ?? '[none]';
+  console.log(`>>> GUILD ${key}: ${msg}`);
 }
 
 function printUser(user) {
@@ -71,6 +74,7 @@ function wrapErrors(func) {
 }
 
 module.exports = {
+  GUILDS,
   bustCache,
   getConfig,
   getStableEmbedColor,

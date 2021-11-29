@@ -1,6 +1,17 @@
+const { SlashCommandBuilder } = require('@discordjs/builders');
 const { log, printUser, wrapErrors } = require('../common.js');
 
 module.exports = {
+  commands: [
+    {
+      schema: new SlashCommandBuilder()
+        .setName('hooray')
+        .setDescription('Hooray!'),
+      execute: async (interaction) => {
+        await interaction.reply('🥳🎉🎊✨');
+      },
+    },
+  ],
   setup: (client) => {
     client.on('messageCreate', wrapErrors(async (message) => {
       if (message.partial) {
@@ -22,7 +33,7 @@ module.exports = {
         return;
       }
       if (/\bthanks,? obama\b/i.test(content)) {
-        await message.reply('You\'re welcome!');
+        await message.reply("You're welcome!");
         log(guild, `'thanks obama' by ${printUser(actor)} in #${channel.name}`);
         return;
       }

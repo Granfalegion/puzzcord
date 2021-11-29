@@ -1,8 +1,10 @@
-const credentials = require('./credentials.json');
 const glob = require('glob');
+const invariant = require('tiny-invariant');
 const path = require('path');
 
 const { Client, Intents } = require('discord.js');
+const { log, printUser, wrapErrors } = require('./common.js');
+const { discord: discordCredentials } = require('./credentials.json');
 
 require('log-timestamp');
 
@@ -33,16 +35,55 @@ client.on('error', err => {
 });
 
 console.log('Loading extensions...');
+client.commands = {};
 glob.sync('./extensions/*.js').forEach(file => {
   try {
     console.log(`Loading ${file}`);
     const extension = require(path.resolve(file));
     extension.setup(client);
+    if (extension.commands?.length) {
+      extension.commands.forEach(command => {
+        const name = command.schema.name;
+        invariant(
+          !client.commands[name],
+          `Duplicate command name '${name}' found!`,
+        );
+        client.commands[name] = command;
+      });
+    }
   } catch (error) {
     console.error(`Failed to load extension ${file}`, error);
   }
 });
 
+
+// Handle all commands
+client.on('interactionCreate', wrapErrors(async (interaction) => {
+  if (!interaction.isCommand()) {
+    return;
+  }
+
+  const { channel, commandName, guild, user } = interaction;
+  const command = client.commands[commandName];
+  if (!command) {
+    return;
+  }
+
+  try {
+    log(
+      interaction.guild,
+      `Command /${commandName} by ${printUser(user)} in #${channel?.name}`,
+    );
+    await command.execute(interaction);
+  } catch (error) {
+    await interaction.reply({
+      content: 'There was an error while executing this command!',
+      ephemeral: true,
+    });
+    throw error;
+  }
+}));
+
 // Login to Discord with your client's token
 console.log('Starting!');
-client.login(credentials.discord.botsecret);
+client.login(discordCredentials.botsecret);
